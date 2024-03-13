@@ -13,6 +13,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class ParallelTest {
 
@@ -26,6 +28,7 @@ public class ParallelTest {
 		try {
 
 			if (browser.equalsIgnoreCase("chrome")) {
+				WebDriverManager.chromedriver().setup();
 				ChromeOptions options = new ChromeOptions();
 				options.addArguments("--no-sandbox");
 				options.addArguments("--disable-dev-shm-usage");
