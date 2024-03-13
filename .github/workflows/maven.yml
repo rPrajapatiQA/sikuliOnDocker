@@ -27,6 +27,20 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Install XRDP
+      run: sudo apt install xrdp -y
+
+    - name: Verify XRDP status
+      run: sudo systemctl status xrdp
+
+    - name: Add xrdp user to ssl-cert group
+      run: sudo adduser xrdp ssl-cert
+
+    - name: Restart XRDP service
+      run: sudo systemctl restart xrdp
 
     - name: Install Chrome browser
       run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
