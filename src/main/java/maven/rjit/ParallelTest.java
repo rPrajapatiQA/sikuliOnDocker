@@ -2,6 +2,7 @@ package maven.rjit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.sikuli.script.Pattern;
@@ -11,6 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 
 public class ParallelTest {
 
@@ -24,10 +26,11 @@ public class ParallelTest {
 		try {
 
 			if (browser.equalsIgnoreCase("chrome")) {
-				//cap.setBrowserName("chrome");
-				//FirefoxOptions browserOptions = new FirefoxOptions();
-				//browserOptions.setAcceptInsecureCerts(true);
-				driver=new ChromeDriver();
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--no-sandbox");
+				options.addArguments("--disable-dev-shm-usage");
+				//options.addArguments("--headless");
+				driver = new ChromeDriver(options);
 				//driver = new RemoteWebDriver(new URL("http://54.82.21.108:4445/wd/hub"),browserOptions);
 				System.out.println("#############--TEST started on " + browser + "--################");
 				//driver = new ChromeDriver();
