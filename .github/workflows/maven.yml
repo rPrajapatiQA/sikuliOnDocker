@@ -43,9 +43,9 @@ jobs:
       run: sudo systemctl restart xrdp
 
     - name: Install Chrome browser
-      #run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
-    - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version
+      uses: browser-actions/setup-chrome@latest
+      #run: sudo apt-get update && sudo apt-get install -y google-chrome-stable && chrome --version
+      
     - name: Build with Maven
       run: mvn -B clean test --file pom.xml
     
