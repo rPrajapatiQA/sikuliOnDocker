@@ -1,73 +1,51 @@
-All collection items must start at the same column (20:5)
-  18 |   build:
-  19 |
-> 20 |     runs-on: ubuntu-latest
-     |     ^^^^^^^^^^^^^^^^^^^^^^
-> 21 |
-     | ^
-> 22 |     steps:
-     | ^
-> 23 |     - uses: actions/checkout@v3
-     | ^
-> 24 |     - name: Set up JDK 11
-     | ^
-> 25 |       uses: actions/setup-java@v3
-     | ^
-> 26 |       with:
-     | ^
-> 27 |         java-version: '11'
-     | ^
-> 28 |         distribution: 'temurin'
-     | ^
-> 29 |         cache: maven
-     | ^
-> 30 |     - name: Checkout the code
-     | ^
-> 31 |       uses: actions/checkout@v2
-     | ^
-> 32 |
-     | ^
-> 33 |     - name: Install XRDP
-     | ^
-> 34 |       run: sudo apt install xrdp -y
-     | ^
-> 35 |
-     | ^
-> 36 |     - name: Verify XRDP status
-     | ^
-> 37 |       run: sudo systemctl status xrdp
-     | ^
-> 38 |
-     | ^
-> 39 |     - name: Add xrdp user to ssl-cert group
-     | ^
-> 40 |       run: sudo adduser xrdp ssl-cert
-     | ^
-> 41 |
-     | ^
-> 42 |     - name: Restart XRDP service
-     | ^
-> 43 |       run: sudo systemctl restart xrdp
-     | ^
-> 44 |     -name: xfce4-session xfce4-goodies
-     | ^
-> 45 |       #uses: browser-actions/setup-chrome@latest
-     | ^
-> 46 |       run:sudo apt-get install xfce4-session xfce4-goodies
-     | ^
-> 47 |       
-     | ^
-> 48 |     -name: Install Chrome browser
-     | ^
-> 49 |       run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
-     | ^
-> 50 |       
-     | ^
-> 51 |     - name: Build with Maven
-     | ^
-> 52 |       run: mvn -B clean test --file pom.xml
-     | ^
-> 53 |     
-     | ^
-> 54 |
-     | ^
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Install XRDP
+      run: sudo apt install xrdp -y
+
+    - name: Verify XRDP status
+      run: sudo systemctl status xrdp
+
+    - name: Add xrdp user to ssl-cert group
+      run: sudo adduser xrdp ssl-cert
+
+    - name: Restart XRDP service
+      run: sudo systemctl restart xrdp
+
+    - name: Install Chrome browser
+      #uses: browser-actions/setup-chrome@latest
+      run: sudo apt-get update && sudo apt-get install -y google-chrome-stable && chrome --version
+      
+    - name: Build with Maven
+      run: mvn -B clean test --file pom.xml
+    
