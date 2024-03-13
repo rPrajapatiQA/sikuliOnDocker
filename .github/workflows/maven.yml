@@ -41,10 +41,11 @@ jobs:
 
     - name: Restart XRDP service
       run: sudo systemctl restart xrdp
-
+    - name: test
+      run: sudo apt-get install xfce4-session xfce4-goodies -y
     - name: Install Chrome browser
       #uses: browser-actions/setup-chrome@latest
-      run: sudo apt-get update && sudo apt-get install -y google-chrome-stable && chrome --version
+      run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
       
     - name: Build with Maven
       run: mvn -B clean test --file pom.xml
