@@ -42,7 +42,8 @@ jobs:
     - name: Restart XRDP service
       run: sudo systemctl restart xrdp
     - name: test
-      run: sudo apt-get install xfce4-session xfce4-goodies -y
+      run: sudo apt update -y && sudo apt upgrade -y && sudo apt install xfce4 xfce4-goodies -y && sudo wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb && sudo apt install ./chrome-remote-desktop_current_amd64.deb -y
+      #run: sudo apt-get install xfce4-session xfce4-goodies -y
     - name: Install Chrome browser
       #uses: browser-actions/setup-chrome@latest
       run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
