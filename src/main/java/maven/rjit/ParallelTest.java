@@ -31,7 +31,7 @@ public class ParallelTest {
 				WebDriverManager.chromedriver().setup();
 				ChromeOptions options = new ChromeOptions();
 				//options.add_argument('--remote-debugging-pipe');
-				options.addArguments("--headless=new");
+				//options.addArguments("--headless=new");
 				options.addArguments("--no-sandbox");
 				options.addArguments("--disable-dev-shm-usage");
 				//options.addArguments("--headless");
