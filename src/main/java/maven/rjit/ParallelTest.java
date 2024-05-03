@@ -23,7 +23,7 @@ public class ParallelTest {
 	@Parameters("browser")
 	@BeforeMethod
 	public void setUp(String browser) throws Exception {
-
+//abcb
 		//DesiredCapabilities cap = new DesiredCapabilities();
 		try {
 
